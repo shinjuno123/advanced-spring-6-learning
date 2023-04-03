@@ -32,12 +32,12 @@ public class CustomerController {
     @PostMapping(CUSTOMER_PATH)
     public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customer){
 
-        CustomerDTO savedCustomer = customerService.saveCustomer(customer);
+            CustomerDTO savedCustomer = customerService.saveCustomer(customer);
 
-        HttpHeaders headers =  new HttpHeaders();
-        headers.add("Location", CUSTOMER_PATH + "/" + savedCustomer.getId() );
+            HttpHeaders headers =  new HttpHeaders();
+            headers.add("Location", CUSTOMER_PATH + "/" + savedCustomer.getId() );
 
-        return new ResponseEntity<>(savedCustomer, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(savedCustomer, headers, HttpStatus.CREATED);
     }
 
     @GetMapping(CUSTOMER_PATH_ID)
@@ -48,7 +48,9 @@ public class CustomerController {
 
     @PutMapping(CUSTOMER_PATH_ID)
     public ResponseEntity updateCustomer(@PathVariable UUID id, @RequestBody CustomerDTO customer){
-        customerService.updateCustomer(id, customer);
+        if(customerService.updateCustomer(id, customer).isEmpty()){
+            throw new NotFoundException();
+        }
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -56,7 +58,10 @@ public class CustomerController {
 
     @DeleteMapping(CUSTOMER_PATH_ID)
     public ResponseEntity deleteCustomerById(@PathVariable UUID id){
-        customerService.deleteCustomerById(id);
+
+        if(!customerService.deleteCustomerById(id)){
+            throw new NotFoundException();
+        };
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
