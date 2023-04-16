@@ -1,11 +1,14 @@
 package guru.springframework.spring6restmvc.service;
 
+import guru.springframework.spring6restmvc.entities.Beer;
 import guru.springframework.spring6restmvc.mappers.BeerMapper;
 import guru.springframework.spring6restmvc.model.BeerDTO;
+import guru.springframework.spring6restmvc.model.BeerStyle;
 import guru.springframework.spring6restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,11 +27,31 @@ public class BeerServiceJPA implements BeerService {
 
 
     @Override
-    public List<BeerDTO> listBeers() {
-        return beerRepository.findAll()
-                .stream()
+    public List<BeerDTO> listBeers(String beerName, BeerStyle beerStyle) {
+
+        List<Beer> beerList;
+
+        if(StringUtils.hasText(beerName) && beerStyle == null){
+            beerList = listBeersByName(beerName);
+        }
+        else if(!StringUtils.hasText(beerName) && beerStyle != null){
+            beerList = listBeersByStyle(beerStyle);
+        }
+        else {
+            beerList = beerRepository.findAll();
+        }
+
+        return beerList.stream()
                 .map(beerMapper::beerToBeerDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Beer> listBeersByStyle(BeerStyle beerStyle) {
+        return beerRepository.findAllByBeerStyle(beerStyle);
+    }
+
+    public List<Beer> listBeersByName(String beerName){
+        return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%");
     }
 
     @Override
