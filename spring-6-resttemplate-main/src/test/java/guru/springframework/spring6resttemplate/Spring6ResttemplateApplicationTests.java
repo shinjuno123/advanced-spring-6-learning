@@ -10,4 +10,7 @@ class Spring6ResttemplateApplicationTests {
     void contextLoads() {
     }
 
+
 }
+
+
