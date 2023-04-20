@@ -1,6 +1,7 @@
 package guru.springframework.spring6restmvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.spring6restmvc.config.SpringSecConfig;
 import guru.springframework.spring6restmvc.entities.Beer;
 import guru.springframework.spring6restmvc.mappers.BeerMapper;
 import guru.springframework.spring6restmvc.model.BeerDTO;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -22,6 +24,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.nio.file.AccessDeniedException;
 import java.util.*;
 
 import static org.hamcrest.Matchers.is;
@@ -30,6 +33,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,6 +52,7 @@ class BeerControllerIntegrationTest {
     @Autowired
     BeerMapper beerMapper;
 
+
     @Autowired
     WebApplicationContext wac;
 
@@ -58,25 +64,43 @@ class BeerControllerIntegrationTest {
     @BeforeEach
     void setup(){
         Locale.setDefault(Locale.ENGLISH);
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+                .apply(springSecurity())
+                .build();
     }
 
     @Test
     void testListBeersByStyleAndNameShowInventoryTrue2() throws Exception {
-        mockMvc.perform(get(BeerController.BEER_PATH)
-                        .queryParam("beerName","IPA")
-                        .queryParam("beerStyle", BeerStyle.IPA.name())
-                        .queryParam("showInventory", "true")
-                        .queryParam("pageSize", "800"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.size()", is(310)))
+
+            mockMvc.perform(get(BeerController.BEER_PATH)
+                            .with(BeerControllerTest.jwtRequestPostProcessor)
+                            .queryParam("beerName","IPA")
+                            .queryParam("beerStyle", BeerStyle.IPA.name())
+                            .queryParam("showInventory", "true")
+                            .queryParam("pageSize", "800"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.content.size()", is(310)))
                 .andExpect(jsonPath("$.content.[0].quantityOnHand").value(IsNull.notNullValue()));
+
+    }
+
+    @Test
+    void testNoAuth() throws Exception {
+
+
+        // Test No Auth
+        mockMvc.perform(get(BeerController.BEER_PATH)
+
+                        .queryParam("beerName", "IPA")
+                        .queryParam("pageSize", "800"))
+                .andExpect(status().isUnauthorized());
 
     }
 
     @Test
     void testListBeersByStyleAndNameShowInventoryTrue() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
                         .queryParam("beerName","IPA")
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("showInventory", "true")
@@ -90,6 +114,7 @@ class BeerControllerIntegrationTest {
     @Test
     void testListBeersByStyleAndNameShowInventoryFalse() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
                 .queryParam("beerName","IPA")
                 .queryParam("beerStyle", BeerStyle.IPA.name())
                 .queryParam("showInventory", "false")
@@ -103,6 +128,7 @@ class BeerControllerIntegrationTest {
     @Test
     void testListBeersByStyleAndName() throws Exception {
          mockMvc.perform(get(BeerController.BEER_PATH)
+                         .with(BeerControllerTest.jwtRequestPostProcessor)
                         .queryParam("beerName", "IPA")
                         .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("pageSize", "800"))
@@ -115,6 +141,7 @@ class BeerControllerIntegrationTest {
     @Test
     void testListBeersByName() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
                         .queryParam("beerName", "IPA")
                         .queryParam("pageSize", "800"))
                 .andExpect(status().isOk())
@@ -124,6 +151,7 @@ class BeerControllerIntegrationTest {
     @Test
     void testListBeersByStyle() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
                 .queryParam("beerStyle", BeerStyle.IPA.name())
                         .queryParam("pageSize", "800"))
                 .andExpect(status().isOk())
@@ -139,6 +167,7 @@ class BeerControllerIntegrationTest {
 
 
         MvcResult result = mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beerMap)))

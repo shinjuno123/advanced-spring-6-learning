@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c81a495d-0565-4a5d-b6e9-3082f15ef8b1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/main/java/guru/springframework/spring6restmvc/config/SpringSecConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/main/java/guru/springframework/spring6restmvc/service/BeerServiceJPA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/main/java/guru/springframework/spring6restmvc/service/BeerServiceJPA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/bootstrap/BootStrapDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/bootstrap/BootStrapDataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/BeerControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/BeerControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/BeerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/BeerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/CustomerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-rest-mvc/src/test/java/guru/springframework/spring6restmvc/controller/CustomerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/main/java/guru/springframework/spring6resttemplate/config/RestTemplateBuilderConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/main/java/guru/springframework/spring6resttemplate/config/RestTemplateBuilderConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/test/java/guru/springframework/spring6resttemplate/client/BeerClientImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/test/java/guru/springframework/spring6resttemplate/client/BeerClientImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/test/java/guru/springframework/spring6resttemplate/client/BeerClientMockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-6-resttemplate-main/src/test/java/guru/springframework/spring6resttemplate/client/BeerClientMockTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OhC4sjAwgQNdZpiak72b4bpfFV" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/juno.JUNHO/Desktop/spring-projects/spring-advance/advanced-spring-6-learning/spring-6-auth-server-main",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c81a495d-0565-4a5d-b6e9-3082f15ef8b1" name="Changes" comment="" />
+      <created>1682003239079</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682003239079</updated>
+      <workItem from="1682003240078" duration="194000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
