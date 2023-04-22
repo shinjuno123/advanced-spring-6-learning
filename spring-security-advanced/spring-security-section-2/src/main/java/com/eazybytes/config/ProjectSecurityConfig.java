@@ -31,7 +31,7 @@ public class ProjectSecurityConfig {
         return http.authorizeHttpRequests().anyRequest().permitAll()
                 .and().formLogin()
                 .and().httpBasic()
-                .and().build();
+                .and().build();d
         */
     }
 
