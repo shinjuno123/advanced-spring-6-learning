@@ -16,7 +16,7 @@ export class LoginService {
 
   validateLoginDetails(user: User) {
     window.sessionStorage.setItem("userdetails",JSON.stringify(user));
-    return this.http.get(environment.rooturl + AppConstants.LOGIN_API_URL, { observe: 'response',withCredentials: true });
+    return this.http.get(environment.rooturl + AppConstants.LOGIN_API_URL, { observe: 'response',withCredentials: false });
   }
 
 }
